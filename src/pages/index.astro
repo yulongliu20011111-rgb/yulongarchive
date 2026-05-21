@@ -1,0 +1,82 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			/* 目录块样式 */
+			.archive-list {
+				list-style-type: none; /* 移除默认的列表圆点 */
+				padding: 0;
+				margin-top: 2rem;
+			}
+			.archive-list li {
+				margin-bottom: 1rem;
+			}
+			.archive-list a {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1.2rem 1.5rem;
+				background-color: #f8f9fa; /* 浅灰底色作为区块区分 */
+				border: 1px solid #e9ecef; /* 细边框提供结构感 */
+				border-radius: 6px;
+				text-decoration: none; /* 移除链接下划线 */
+				color: #212529;
+				transition: background-color 0.2s, transform 0.2s;
+			}
+			/* 鼠标悬浮时的交互反馈 */
+			.archive-list a:hover {
+				background-color: #e2e6ea;
+				transform: translateX(4px); /* 产生轻微向右滑动的阅读引导 */
+			}
+			.item-title {
+				font-weight: 600;
+				font-size: 1.1rem;
+			}
+			.item-status {
+				font-size: 0.9rem;
+				color: #6c757d; /* 次要信息降低视觉层级 */
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>道光十六年</h1>
+			<p>原贴吧连载：用历史学的方式写V3战报。</p>
+
+			<hr />
+
+			<h2>进入档案</h2>
+
+			<ul class="archive-list">
+				<li>
+					<a href="/blog">
+						<span class="item-title">📖 战报正文</span>
+						<span class="item-status">进入阅读 →</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="item-title">⏳ 世界年表</span>
+						<span class="item-status">建设中...</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="item-title">👥 人物档案</span>
+						<span class="item-status">建设中...</span>
+					</a>
+				</li>
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
