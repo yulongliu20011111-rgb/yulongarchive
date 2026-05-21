@@ -2,7 +2,7 @@
 title: '道光十六年：第二章 许乃济'
 description: '1837-1839。'
 pubDate: '2026-05-11'
-heroImage: '../../assets/blog-first-page.jpg'
+heroImage: '../../assets/MEGA_EVENT_1.png'
 ---
 
 第二章 许乃济（1837-1839）
