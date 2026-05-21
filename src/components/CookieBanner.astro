@@ -1,0 +1,106 @@
+---
+// 这是一个底部的 Cookie 提示弹窗组件
+---
+
+<div id="cookie-banner" class="cookie-banner hidden">
+  <div class="cookie-content">
+    <p>
+      📜 <strong>档案馆提示：</strong> 本站使用 Google Analytics 进行匿名访问统计，以帮助我了解站点的运行情况。您可以选择接受以支持本站，或拒绝所有非必要的数据收集。
+    </p>
+    <div class="cookie-buttons">
+      <button id="btn-accept" class="btn accept">全部接受</button>
+      <button id="btn-reject" class="btn reject">拒绝非必要</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 弹窗的排版样式 */
+  .cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 16px 20px;
+    z-index: 9999; /* 确保它显示在最上层 */
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .cookie-banner.hidden {
+    display: none; /* 隐藏弹窗的开关 */
+  }
+  .cookie-content p {
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+  }
+  .cookie-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+  .btn {
+    padding: 6px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  .btn.accept {
+    background-color: #0d6efd;
+    color: white;
+  }
+  .btn.accept:hover {
+    background-color: #0b5ed7;
+  }
+  .btn.reject {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  .btn.reject:hover {
+    background-color: #dde2e6;
+  }
+</style>
+
+<script is:inline>
+  // 这里就是“动态更新”的逻辑线
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const btnAccept = document.getElementById('btn-accept');
+    const btnReject = document.getElementById('btn-reject');
+
+    // 1. 检查用户的浏览器里是否已经存过选择记录
+    // 如果没有记录，说明是新访客，弹出横幅
+    if (!localStorage.getItem('cookie_consent_status')) {
+      banner.classList.remove('hidden');
+    }
+
+    // 2. 当用户点击“全部接受”时的动作
+    btnAccept.addEventListener('click', () => {
+      // 告诉 Google：更新状态为允许！
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      });
+      // 在浏览器里记下小本本：用户同意了，下次别弹了
+      localStorage.setItem('cookie_consent_status', 'accepted');
+      // 隐藏弹窗
+      banner.classList.add('hidden');
+    });
+
+    // 3. 当用户点击“拒绝非必要”时的动作
+    btnReject.addEventListener('click', () => {
+      // 告诉 Google：维持拒绝状态（由于上面默认设置了拒绝，这里其实只需记录选择即可）
+      localStorage.setItem('cookie_consent_status', 'rejected');
+      banner.classList.add('hidden');
+    });
+  });
+</script>

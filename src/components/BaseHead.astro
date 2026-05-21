@@ -55,3 +55,24 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  // Consent Mode v2 要求的 4 个核心参数，默认全部设为 denied（拒绝）
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'wait_for_update': 500 // 给予弹窗组件 500 毫秒的时间读取用户历史选择
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QM7Z5RMVN4"></script>
+
+<script is:inline>
+  gtag('js', new Date());
+  gtag('config', 'G-QM7Z5RMVN4');
+</script>
